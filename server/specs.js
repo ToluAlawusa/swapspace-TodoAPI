@@ -1,8 +1,10 @@
 var app = require('./server'),
     chai = require('chai'),
     http = require('chai-http'),
+    todomodel = require('../todo/todomodel'),
     request = require('supertest'),
     expect = chai.expect,
+    assert = chai.assert,
     should = chai.should();
 
     chai.use(http);
@@ -10,7 +12,19 @@ var app = require('./server'),
 
 
     describe('TODOS', function() { 
-        it("it should fail if there are no tasks", function(done) {
+
+        var item = {
+            "task" : "i have arrived"
+        };
+
+        // beforeEach(function(done){
+        //     todomodel.remove().then(function(){
+        //     assert(todomodel == 0);
+        //     done();
+
+        // }); 
+
+        it.skip("it should fail if there are no tasks", function(done) {
             request(app)
                 .get('/todos')
                 .expect(501)
@@ -33,4 +47,16 @@ var app = require('./server'),
 
 		    	});
     	})
+
+        it.skip("should add a task to the todo database", function(done) {
+            chai.request(app)
+                .post('/todos')
+                .send(item)
+                .end(function(err, res) {
+                    res.should.have.status(200);
+                    should.not.exist(err);
+                    res.body.should.be.an("Object");
+                    done();
+                });
+        })
     })
