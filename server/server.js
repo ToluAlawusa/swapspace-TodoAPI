@@ -17,7 +17,7 @@ app.use('/todos', todorouter);
 // express's automatic error handler middleware
 app.use(function(err, req, res, next){
 
-	res.status(501).json(err);
+	res.status(501).json(err.message);
 
 })
 

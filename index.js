@@ -1,5 +1,5 @@
 var app = require('./server/server'),
-	PORT = 3000;
+	PORT = 5000;
 
 
 // this starts the app
