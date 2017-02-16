@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 
 mongoose.connect('localhost');
 
+mongoose.Promise = global.Promise;
+
 var Schema = mongoose.Schema;
 
 var TodoSchema = new Schema({
